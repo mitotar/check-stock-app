@@ -1,0 +1,17 @@
+/* CSS specific only to index.html */
+
+a.products-link,
+a.products-link:visited,
+a.products-link:active {
+    color: darkgray;
+}
+
+a.check-stock-link,
+a.check-stock-link:visited,
+a.check-stock-link:active {
+    color: white;
+}
+
+a.products-link:hover {
+    color: lightgray;
+}

@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='index.css') }}">
+{% endblock link %}
+
+{% block title %}
+<h2 class="text-center mb-5">Checking Stock...</h2>
+{% endblock title %}
+
+{% block content %}
+
+{% if values|length == 0 %}
+<div class="text-center">
+    <h4>You have no products to check for. Add one from the "Products" page to get started.</h4>
+</div>
+{% else %}
+<table class="table table-bordered bg-white">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Product Name</th>
+            <th scope="col">Stock Status</th>
+            <th scope="col">Site</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for item in values %}
+        <tr>
+            <td><a href="{{item.url}}" target="_blank">{{item.product_name}}</a></td>
+            <td>{{check_stock(item)}}</td>
+            <td>{{item.site_name}}</td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+{% endif %}
+
+{% endblock content %}
