@@ -9,7 +9,8 @@ from check_stock import check_stock, Product, validate_url
 
 app = Flask(__name__)  # reference this file
 app.secret_key = "\xdb\xf5xn-\xaa\xf4\xdeHw\xacc\xb9\xc8\xcdA\xfe\xcfxT\xe4\xf3\xe4\x89"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///products.sqlite3"
+# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///products.sqlite3"
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgres://ptbmzeoojhjyqn:183d0bd5d83037665ee999566150fb2dc8af79939be350c2db10d6249546af05@ec2-184-73-243-101.compute-1.amazonaws.com:5432/d1sldsv1g5i1pq"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
@@ -17,6 +18,7 @@ migrate = Migrate(app, db)  # needed to add a column
 
 
 class Products(db.Model):
+    __tablename__ = "Products"
     url = db.Column("url", db.String, primary_key=True)
     product_name = db.Column("product_name", db.String)
     site_name = db.Column("site_name", db.String)
@@ -56,4 +58,4 @@ def products():
 if __name__ == "__main__":
     webbrowser.open("http://127.0.0.1:5000/")
     db.create_all()
-    app.run(debug=True)
+    app.run()
