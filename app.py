@@ -13,7 +13,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "postgres://ptbmzeoojhjyqn:183d0bd5d8303
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)  # needed to add a column
+# migrate = Migrate(app, db)  # needed to add a column
 
 
 class Products(db.Model):
@@ -55,5 +55,4 @@ def products():
 
 
 if __name__ == "__main__":
-    db.create_all()
     app.run()
