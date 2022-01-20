@@ -2,7 +2,6 @@ from flask import Flask, render_template, url_for, redirect, request, session, f
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from sqlalchemy.sql import text
-import webbrowser
 
 from check_stock import check_stock, Product, validate_url
 
@@ -56,6 +55,5 @@ def products():
 
 
 if __name__ == "__main__":
-    webbrowser.open("http://127.0.0.1:5000/")
     db.create_all()
     app.run()
