@@ -1,7 +1,5 @@
 from flask import Flask, render_template, url_for, redirect, request, session, flash
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from sqlalchemy.sql import text
 
 from check_stock import check_stock, Product, validate_url
 
@@ -13,8 +11,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "postgres://ptbmzeoojhjyqn:183d0bd5d8303
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
-# migrate = Migrate(app, db)  # needed to add a column
-
 
 class Products(db.Model):
     __tablename__ = "Products"
