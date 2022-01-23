@@ -6,7 +6,7 @@ from src.product import check_stock, create_product
 from src.web_helper import is_url_valid
 
 
-ENV = "dev"
+ENV = "prod"
 
 app = Flask(__name__)  # reference this file
 db = SQLAlchemy(app)
