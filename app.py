@@ -1,6 +1,8 @@
 import webbrowser
 from flask import Flask, render_template, request, flash
 from flask_sqlalchemy import SQLAlchemy
+import sys
+import logging
 
 from src.product import check_stock, create_product
 from src.web_helper import is_url_valid
@@ -10,6 +12,9 @@ ENV = "prod"
 
 app = Flask(__name__)  # reference this file
 db = SQLAlchemy(app)
+
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
 
 
 class Products(db.Model):
