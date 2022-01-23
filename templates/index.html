@@ -28,7 +28,7 @@
         {% for item in values %}
         <tr>
             <td><a href="{{item.url}}" target="_blank">{{item.product_name}}</a></td>
-            <td>{{check_stock(item)}}</td>
+            <td>{{check_stock(item.site_name, item.url)}}</td>
             <td>{{item.site_name}}</td>
         </tr>
         {%endfor%}
