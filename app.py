@@ -62,10 +62,10 @@ if __name__ == "__main__":
     if ENV == "prod":
         app.config["SQLALCHEMY_DATABASE_URI"] = "postgres://ptbmzeoojhjyqn:183d0bd5d83037665ee999566150fb2dc8af79939be350c2db10d6249546af05@ec2-184-73-243-101.compute-1.amazonaws.com:5432/d1sldsv1g5i1pq"
         app.debug = False
-    elif ENV == "dev":
-        app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///products.sqlite3"
-        app.debug = True
-        webbrowser.open("http://127.0.0.1:5000/")
+    # elif ENV == "dev":
+    #     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///products.sqlite3"
+    #     app.debug = True
+    #     webbrowser.open("http://127.0.0.1:5000/")
 
     db.create_all()
     app.run()
