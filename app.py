@@ -66,6 +66,6 @@ if __name__ == "__main__":
         app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///products.sqlite3"
         app.debug = True
         webbrowser.open("http://127.0.0.1:5000/")
-        db.create_all()
 
+    db.create_all()
     app.run()
