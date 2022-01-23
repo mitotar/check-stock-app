@@ -1,9 +1,10 @@
 import webbrowser
-from flask import Flask, render_template, url_for, redirect, request, session, flash
+from flask import Flask, render_template, request, flash
 from flask_sqlalchemy import SQLAlchemy
 
-from web_helper import is_url_valid
-from product import Product
+from src.product import check_stock, create_product
+from src.web_helper import is_url_valid
+
 
 ENV = "dev"
 
@@ -14,18 +15,20 @@ db = SQLAlchemy(app)
 class Products(db.Model):
     __tablename__ = "Products"
     url = db.Column("url", db.String, primary_key=True)
-    product_name = db.Column("product_name", db.String)
     site_name = db.Column("site_name", db.String)
+    product_name = db.Column("product_name", db.String)
 
-    def __init__(self, product):
-        self.url = product.url
-        self.product_name = product.product_name
-        self.site_name = product.site_name
+    def __init__(self, url):
+        product = create_product(url)
+        self.url = url
+        self.site_name = product[0]
+        self.product_name = product[1]
+        # self.nickname = nickname # currently not implemented
 
 
 @app.route("/")
 def index():
-    return render_template("index.html", values=Products.query.all(), check_stock=Product.check_stock)
+    return render_template("index.html", values=Products.query.all(), check_stock=check_stock)
 
 
 @ app.route("/products_list", methods=["POST", "GET"])
@@ -36,8 +39,7 @@ def products():
             if is_url_valid(url):
                 # if link is not already in the database then add it
                 if not Products.query.filter_by(url=url).first():
-                    product = Product(url)
-                    db.session.add(Products(product))
+                    db.session.add(Products(url))
                     db.session.commit()
             else:
                 flash("URL not valid.")
@@ -46,7 +48,7 @@ def products():
             Products.query.filter_by(url=url).delete()
             db.session.commit()
 
-    return render_template("products_list.html", values=Products.query.all())
+    return render_template("products_list.html", values=Products.query.all(), check_stock=check_stock)
 
 
 if __name__ == "__main__":
