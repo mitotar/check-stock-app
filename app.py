@@ -48,12 +48,12 @@ def products():
             Products.query.filter_by(url=url).delete()
             db.session.commit()
 
-    return render_template("products_list.html", values=Products.query.all(), check_stock=check_stock)
+    return render_template("products_list.html", values=Products.query.all())
 
 
 if __name__ == "__main__":
     app.secret_key = "\xdb\xf5xn-\xaa\xf4\xdeHw\xacc\xb9\xc8\xcdA\xfe\xcfxT\xe4\xf3\xe4\x89"
-    # app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     if ENV == "prod":
         app.config["SQLALCHEMY_DATABASE_URI"] = "postgres://ptbmzeoojhjyqn:183d0bd5d83037665ee999566150fb2dc8af79939be350c2db10d6249546af05@ec2-184-73-243-101.compute-1.amazonaws.com:5432/d1sldsv1g5i1pq"
         app.debug = False
