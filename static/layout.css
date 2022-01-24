@@ -7,3 +7,20 @@ body {
 table {
     background-color: white;
 }
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content {
+    padding-bottom: 2.8rem; /* Footer height */
+}
+
+#footer {
+    background-color: black;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.8rem; /* Footer height */
+}
