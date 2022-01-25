@@ -8,7 +8,7 @@ from src.product import check_stock, create_product
 from src.web_helper import is_url_valid
 
 
-ENV = "prod"
+ENV = "dev"
 
 app = Flask(__name__)  # reference this file
 db = SQLAlchemy(app)
@@ -46,7 +46,7 @@ class Products(db.Model):
 
 @app.route("/")
 def index():
-    return render_template("index.html", values=Products.query.all(), check_stock=check_stock)
+    return render_template("stock.html", values=Products.query.all(), check_stock=check_stock)
 
 
 @ app.route("/products_list", methods=["POST", "GET"])
@@ -66,7 +66,7 @@ def products():
             Products.query.filter_by(url=url).delete()
             db.session.commit()
 
-    return render_template("products_list.html", values=Products.query.all())
+    return render_template("products.html", values=Products.query.all())
 
 
 if __name__ == "__main__":
