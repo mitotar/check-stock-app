@@ -1,29 +1,27 @@
-{% extends 'layout.html' %}
+{% extends 'base.html' %}
 
 {% block link %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='products.css') }}">
 {% endblock link %}
 
 {% block content %}
-<div class="">
-    <form action="#" name="form_add" method="post" autocomplete="off">
-        <h5 class="mb-4">Add a product</h5>
-        <p>Supported websites:</p>
-        <ul>
-            <li>
-                <a href="https://www.chapters.indigo.ca">www.chapters.indigo.ca</a>
-            </li>
-            <li>
-                <a href="https://www.lego.ca">www.lego.ca</a>
-            </li>
-        </ul>
-        <span>URL:</span>
-        <input type="text" name="add_url" class="add-url-input" />
+<form action="#" name="form-add" method="post" autocomplete="off">
+    <h5 class="mb-4">Add a product</h5>
+    <p>Supported websites:</p>
+    <ul>
+        <li>
+            <a href="https://www.chapters.indigo.ca">www.chapters.indigo.ca</a>
+        </li>
+        <li>
+            <a href="https://www.lego.ca">www.lego.ca</a>
+        </li>
+    </ul>
+    <span>URL:</span>
+    <input type="text" name="add-url" class="add-url-input" />
 
-        <br>
-        <input type="submit" name="btn_add" value="Add" class="btn btn-primary my-3" />
-    </form>
-</div>
+    <br>
+    <button type="submit" name="btn-add" class="btn btn-primary my-3">Add</button>
+</form>
 
 <h5 class="my-4">Stock will be checked for the following products</h5>
 
@@ -42,8 +40,8 @@
             <td>{{item.product_name}}</td>
             <td><a href="{{item.url}}" target="_blank">{{item.url}}</a></td>
             <td class="align-middle">
-                <form action="#" name="form_delete" method="post">
-                    <button type="submit" name="btn_delete" value="{{item.url}}" class="btn btn-danger">Delete</button>
+                <form action="#" name="form-delete" method="post">
+                    <button type="submit" name="btn-delete" value="{{item.url}}" class="btn btn-danger">Delete</button>
                 </form>
             </td>
         </tr>

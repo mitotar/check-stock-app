@@ -7,30 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='layout.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='header.css') }}">
 
     {% block link %}
     {% endblock %}
 </head>
 
 <body>
+    {% include 'header.html' %}
     <div id="page-container">
-        <nav class="navbar navbar-expand-lg bg-dark mb-5">
-            <div class="container-fluid">
-                <a class="navbar-brand check-stock-link" href="/">Check Stock</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link products-link" href="/products_list">Products</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
         <div id="content">
             <div class="container">
                 {% block title %}

@@ -1,11 +1,13 @@
 import webbrowser
-from flask import Flask, render_template, request, flash
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 import sys
 import logging
 
-from src.product import check_stock, create_product
-from src.web_helper import is_url_valid
+from src.views import views
+from src.auth import auth
+from src.models import Users, Products
 
 
 ENV = "dev"
@@ -29,45 +31,20 @@ db.create_all()
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 
+app.register_blueprint(views, url_prefix="/")
+app.register_blueprint(auth, url_prefix="/")
 
-class Products(db.Model):
-    __tablename__ = "Products"
-    url = db.Column("url", db.String, primary_key=True)
-    site_name = db.Column("site_name", db.String)
-    product_name = db.Column("product_name", db.String)
-
-    def __init__(self, url):
-        product = create_product(url)
-        self.url = url
-        self.site_name = product[0]
-        self.product_name = product[1]
-        # self.nickname = nickname # currently not implemented
+login_manager = LoginManager()
+login_manager.login_view = "auth.index"
+login_manager.init_app(app)
 
 
-@app.route("/")
-def index():
-    return render_template("stock.html", values=Products.query.all(), check_stock=check_stock)
-
-
-@ app.route("/products_list", methods=["POST", "GET"])
-def products():
-    if request.method == "POST":
-        if "add_url" in request.form:
-            url = request.form["add_url"]
-            if is_url_valid(url):
-                # if link is not already in the database then add it
-                if not Products.query.filter_by(url=url).first():
-                    db.session.add(Products(url))
-                    db.session.commit()
-            else:
-                flash("URL not valid.")
-        elif "btn_delete" in request.form:
-            url = request.form['btn_delete']
-            Products.query.filter_by(url=url).delete()
-            db.session.commit()
-
-    return render_template("products.html", values=Products.query.all())
+@login_manager.user_loader
+def user_load(username):
+    return Users.query.get(username=username)
 
 
 if __name__ == "__main__":
+    app.logger.addHandler(logging.StreamHandler(sys.stdout))
+    app.logger.setLevel(logging.ERROR)
     app.run()

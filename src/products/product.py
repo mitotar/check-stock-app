@@ -1,6 +1,6 @@
-from src.web_helper import get_site_name
-import src.products.indigo_product as indigo
-import src.products.lego_product as lego
+from ..web_helper import get_site_name
+from . import product_indigo as indigo
+from . import product_lego as lego
 
 
 def create_product(url):

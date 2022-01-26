@@ -1,0 +1,17 @@
+products.sqlite3
+__pycache__/app.cpython-37.pyc
+__pycache__/check_stock.cpython-37.pyc
+__pycache__/product.cpython-37.pyc
+__pycache__/web_helper.cpython-37.pyc
+src/__pycache__/__init__.cpython-37.pyc
+src/__pycache__/auth.cpython-37.pyc
+src/__pycache__/models.cpython-37.pyc
+src/__pycache__/product.cpython-37.pyc
+src/__pycache__/views.cpython-37.pyc
+src/__pycache__/web_helper.cpython-37.pyc
+src/products/__pycache__/__init__.cpython-37.pyc
+src/products/__pycache__/indigo_product.cpython-37.pyc
+src/products/__pycache__/lego_product.cpython-37.pyc
+src/products/__pycache__/product_indigo.cpython-37.pyc
+src/products/__pycache__/product_lego.cpython-37.pyc
+src/products/__pycache__/product.cpython-37.pyc

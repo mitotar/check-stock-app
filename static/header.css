@@ -1,0 +1,14 @@
+nav {
+    height: 4rem;
+}
+
+.header,
+.header * {
+    color: darkgray;
+}
+
+.current-page,
+a.current-page:visited,
+a.current-page:active {
+    color: white;
+}
