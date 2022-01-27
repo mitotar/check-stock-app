@@ -8,6 +8,7 @@ nav {
 }
 
 .current-page,
+a:hover,
 a.current-page:visited,
 a.current-page:active {
     color: white;

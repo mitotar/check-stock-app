@@ -13,46 +13,41 @@
 <div class="d-flex justify-content-around">
     <div class="">
         <h4 class="text-center mb-4">Sign Up</h4>
-        <form action="sign-up-form" name="sign-up" method="POST">
+        <form name="form-sign-up" method="post">
             <div class="form-group">
                 <label for="sign-up-user">Username</label>
-                <input type="text" class="form-control" id="sign-up-user" placeholder="Username">
+                <input type="text" class="form-control" name="sign-up-user" placeholder="Username">
             </div>
             <div class="form-group">
                 <label for="sign-up-pass">Password</label>
-                <input type="password" class="form-control" id="sign-up-pass" placeholder="Password">
+                <input type="password" class="form-control" name="sign-up-pass" placeholder="Password">
             </div>
             <div class="form-group">
                 <label for="sign-up-confirm-pass">Confirm Password</label>
-                <input type="password" class="form-control" id="sign-up-confirm-pass" placeholder="Confirm Password">
+                <input type="password" class="form-control" name="sign-up-confirm-pass" placeholder="Confirm Password">
             </div>
             <div class="form-group text-center mt-4">
-                <button type="submit" class="btn btn-primary">Sign up</button>
+                <button type="submit" name="btn-sign-up" class="btn btn-primary">Sign up</button>
             </div>
         </form>
     </div>
     <div class="d-flex">
         <div class="">
             <h4 class="text-center mb-4">Sign In</h4>
-            <form action="sign-in-form" name="sign-in" method="POST">
+            <form name="form-sign-in" method="post">
                 <div class="form-group">
                     <label for="sign-in-user">Username</label>
-                    <input type="text" class="form-control" id="sign-in-user" placeholder="Username">
+                    <input type="text" class="form-control" name="sign-in-user" placeholder="Username">
                 </div>
                 <div class="form-group">
                     <label for="sign-in-pass">Password</label>
-                    <input type="password" class="form-control" id="sign-in-pass" placeholder="Password">
+                    <input type="password" class="form-control" name="sign-in-pass" placeholder="Password">
                 </div>
                 <div class="form-group text-center mt-4">
-                    <button type="submit" class="btn btn-primary">Sign In</button>
+                    <button type="submit" name="btn-sign-in" class="btn btn-primary">Sign In</button>
                 </div>
             </form>
         </div>
     </div>
-</div>
-
-<div class="">
-    <a class="navbar-brand {{'current-page' if request.path == '/stock' }}" href="/stock">Check Stock</a>
-    <a class="nav-link {{'current-page' if request.path == '/products' }}" href="/products">Products</a>
 </div>
 {%endblock %}

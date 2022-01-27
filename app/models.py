@@ -1,12 +1,14 @@
+from enum import unique
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 
-from app import db
+from . import db
 
 
 class Users(db.Model, UserMixin):
     __tablename__ = "Users"
-    username = db.Column("username", db.String, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column("username", db.String, unique=True)
     password = db.Column("password", db.String)
     last_login = db.Column("last_login", db.DateTime(
         timezone=True), default=func.now())
