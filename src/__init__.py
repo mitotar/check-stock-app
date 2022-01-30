@@ -30,7 +30,7 @@ def create_app(env):
     app.register_blueprint(auth, url_prefix="/")
 
     # from .models import Users, Products
-    import app.models as models
+    import src.models as models
 
     db.create_all(app=app)
 
