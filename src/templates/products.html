@@ -38,7 +38,7 @@
         {% for item in values %}
         <tr>
             <td>{{item.product_name}}</td>
-            <td><a href="{{item.url}}" target="_blank">{{item.url}}</a></td>
+            <td><a href="{{item.url}}" class="product-url" target="_blank">{{item.url}}</a></td>
             <td class="align-middle">
                 <form action="#" name="form-delete" method="post">
                     <button type="submit" name="btn-delete" value="{{item.url}}" class="btn btn-danger">Delete</button>
