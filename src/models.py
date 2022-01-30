@@ -21,7 +21,7 @@ class Users(db.Model, UserMixin):
 class Products(db.Model):
     __tablename__ = "Products"
     username = db.Column("username", db.String,
-                         foreign_key="Users.username", primary_key=True)
+                         ForeignKey(Users.username), primary_key=True)
     url = db.Column("url", db.String, primary_key=True)
     site_name = db.Column("site_name", db.String)
     product_name = db.Column("product_name", db.String)
