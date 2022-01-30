@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='products.css') }}">
+{% endblock link %}
+
+{% block content %}
+<form action="#" name="form-add" method="post" autocomplete="off">
+    <h5 class="mb-4">Add a product</h5>
+    <p>Supported websites:</p>
+    <ul>
+        <li>
+            <a href="https://www.chapters.indigo.ca">www.chapters.indigo.ca</a>
+        </li>
+        <li>
+            <a href="https://www.lego.ca">www.lego.ca</a>
+        </li>
+    </ul>
+    <span>URL:</span>
+    <input type="text" name="add-url" class="add-url-input" />
+
+    <br>
+    <button type="submit" name="btn-add" class="btn btn-primary my-3">Add</button>
+</form>
+
+<h5 class="my-4">Stock will be checked for the following products</h5>
+
+<table class="table table-bordered mb-5">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Product Name</th>
+            <th cope="col">Product URL</th>
+            <th cope="col"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for item in values %}
+        <tr>
+            <td>{{item.product_name}}</td>
+            <td><a href="{{item.url}}" target="_blank">{{item.url}}</a></td>
+            <td class="align-middle">
+                <form action="#" name="form-delete" method="post">
+                    <button type="submit" name="btn-delete" value="{{item.url}}" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+
+{% endblock content %}
