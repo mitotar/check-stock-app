@@ -8,8 +8,7 @@ from . import db
 
 class Users(db.Model, UserMixin):
     __tablename__ = "Users"
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column("username", db.String, unique=True)
+    username = db.Column("username", db.String, primary_key=True)
     password = db.Column("password", db.String)
     last_login = db.Column("last_login", db.DateTime(
         timezone=True), default=func.now())
@@ -21,8 +20,8 @@ class Users(db.Model, UserMixin):
 
 class Products(db.Model):
     __tablename__ = "Products"
-    user_id = db.Column(db.Integer, db.ForeignKey(
-        "Users.id"), primary_key=True)
+    username = db.Column("username", db.String,
+                         foreign_key="Users.username", primary_key=True)
     url = db.Column("url", db.String, primary_key=True)
     site_name = db.Column("site_name", db.String)
     product_name = db.Column("product_name", db.String)
