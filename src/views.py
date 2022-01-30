@@ -33,7 +33,7 @@ def products():
         elif "btn-delete" in request.form:
             url = request.form['btn-delete']
             Products.query.filter_by(
-                url=url, user=current_user.username).delete()
+                url=url, username=current_user.username).delete()
             db.session.commit()
 
     return render_template("products.html", values=Products.query.filter_by(username=current_user.username).all())
