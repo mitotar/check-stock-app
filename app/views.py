@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 from .models import Users, Products
 from .products.product import check_stock as checkstock, create_product
@@ -12,10 +12,10 @@ views = Blueprint("views", __name__)
 @views.route("/stock")
 @login_required
 def check_stock():
-    return render_template("stock.html", values=Products.query.all(), check_stock=checkstock)
+    return render_template("stock.html", values=Products.query.filter_by(user_id=current_user.id).all(), check_stock=checkstock)
 
 
-@ views.route("/products", methods=["POST", "GET"])
+@views.route("/products", methods=["POST", "GET"])
 @login_required
 def products():
     if request.method == "POST":
@@ -23,15 +23,15 @@ def products():
             url = request.form["add-url"]
             if is_url_valid(url):
                 # if link is not already in the database then add it
-                if not Products.query.filter_by(url=url).first():
+                if not Products.query.filter_by(url=url, user_id=current_user.id).first():
                     site, name = create_product(url)
-                    db.session.add(Products(url, site, name))
+                    db.session.add(Products(url, site, name, current_user.id))
                     db.session.commit()
             else:
                 flash("URL not valid.")
         elif "btn-delete" in request.form:
             url = request.form['btn-delete']
-            Products.query.filter_by(url=url).delete()
+            Products.query.filter_by(url=url, user_id=current_user.id).delete()
             db.session.commit()
 
-    return render_template("products.html", values=Products.query.all())
+    return render_template("products.html", values=Products.query.filter_by(user_id=current_user.id).all())

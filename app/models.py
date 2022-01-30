@@ -1,5 +1,6 @@
 from enum import unique
 from flask_login import UserMixin
+from sqlalchemy import ForeignKey
 from sqlalchemy.sql import func
 
 from . import db
@@ -20,12 +21,15 @@ class Users(db.Model, UserMixin):
 
 class Products(db.Model):
     __tablename__ = "Products"
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        "Users.id"), primary_key=True)
     url = db.Column("url", db.String, primary_key=True)
     site_name = db.Column("site_name", db.String)
     product_name = db.Column("product_name", db.String)
 
-    def __init__(self, url, site_name, product_name):
+    def __init__(self, url, site_name, product_name, user_id):
         self.url = url
         self.site_name = site_name
         self.product_name = product_name
+        self.user_id = user_id
         # self.nickname = nickname # currently not implemented

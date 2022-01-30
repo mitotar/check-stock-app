@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, url_for, redirect, request, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy.sql import func
 
 from .models import Users, Products
 from . import db
@@ -37,6 +38,8 @@ def index():
             user = Users.query.filter_by(username=username).first()
             if user:
                 if check_password_hash(user.password, password):
+                    user.last_login = func.now()
+                    db.session.commit()
                     login_user(user, remember=True)
                     return redirect(url_for("views.check_stock"))
                 else:
