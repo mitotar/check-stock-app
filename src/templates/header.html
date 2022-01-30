@@ -4,6 +4,7 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='header.css') }}">
 {% endblock %}
 
+{% block heaader %}
 {% if request.path == '/' %}
 <nav class="header navbar navbar-expand-lg bg-dark">
     <div class="container-fluid">
@@ -31,3 +32,4 @@
     </div>
 </nav>
 {% endif %}
+{% endblock %}
