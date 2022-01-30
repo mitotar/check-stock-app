@@ -2,12 +2,12 @@ nav {
     height: 4rem;
 }
 
-.header,
-.header * {
+#header,
+#header * {
     color: darkgray;
 }
 
-.header .current-page,
-.header a.current-page:visited {
+#header .current-page,
+#header a.current-page:visited {
     color: white;
 }

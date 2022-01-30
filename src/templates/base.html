@@ -7,14 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='base.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='header.css') }}">
     {% block link %}
     {% endblock %}
 </head>
 
 <body>
     <div id="page-container">
-        {% block header %}
-        {% endblock %}
+        {% include "header.html" %}
 
         {% with messages = get_flashed_messages(with_categories=True) %}
         {% if messages %}
