@@ -8,6 +8,10 @@ table {
     background-color: white;
 }
 
+table a:hover {
+    color: blue;
+}
+
 #page-container {
     position: relative;
     min-height: 100vh;

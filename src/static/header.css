@@ -7,9 +7,8 @@ nav {
     color: darkgray;
 }
 
-.current-page,
-a:hover,
-a.current-page:visited,
-a.current-page:active {
+.header .current-page,
+.header a.current-page:visited,
+.header a.current-page:active {
     color: white;
 }
