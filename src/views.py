@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, flash
 from flask_login import login_required, current_user
 
 from .models import Users, Products
-from .products.product import check_stock as checkstock, create_product
+from .products.product import check_stock as checkstock, create_product, SUPPORTED_SITES as SITES
 from .web_helper import is_url_valid
 from . import db
 
@@ -36,4 +36,4 @@ def products():
                 url=url, username=current_user.username).delete()
             db.session.commit()
 
-    return render_template("products.html", values=Products.query.filter_by(username=current_user.username).all())
+    return render_template("products.html", values=Products.query.filter_by(username=current_user.username).all(), sites=SITES)
