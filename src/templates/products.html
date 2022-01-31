@@ -8,14 +8,17 @@
 <form action="#" name="form-add" method="post" autocomplete="off">
     <h5 class="mb-4">Add a product</h5>
     <p>Supported websites:</p>
-    <ul>
-        <li>
-            <a href="https://www.chapters.indigo.ca" target="_blank">www.chapters.indigo.ca</a>
-        </li>
-        <li>
-            <a href="https://www.lego.ca" target="_blank">www.lego.ca</a>
-        </li>
-    </ul>
+    <div class="d-flex flex-row justify-content-between">
+        {% for col in sites|batch(3) %}
+        <ul class="">
+            {% for s in col %}
+            <li>
+                <a href="https://{{s}}" target="_blank">{{s}}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    </div>
     <span>URL:</span>
     <input type="text" name="add-url" class="add-url-input" />
 
