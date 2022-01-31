@@ -27,3 +27,12 @@ def check_stock(site, url):
         return lego.check_stock(url)
     elif site == bgb.SITE:
         return bgb.check_stock(url)
+
+
+def check_price(site, url):
+    if site == indigo.SITE:
+        return indigo.check_price(url)
+    elif site == lego.SITE:
+        return lego.check_price(url)
+    elif site == bgb.SITE:
+        return bgb.check_price(url)

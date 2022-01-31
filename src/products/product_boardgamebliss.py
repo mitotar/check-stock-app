@@ -17,6 +17,19 @@ def check_stock(url):
         "span", class_="product-form__inventory").get_text()
 
 
+def check_price(url):
+    try:
+        req = requests.get(url)
+    except requests.exceptions.ConnectionError:
+        return "Page not found"
+
+    text = req.text
+    # second term was added to avoid warning, as instructed by module terminal output
+    soup = BeautifulSoup(text, features="lxml")
+
+    return soup.find("span", class_="price").get_text()
+
+
 def get_product_name(url):
     try:
         req = requests.get(url)
