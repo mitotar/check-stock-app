@@ -17,8 +17,9 @@
 <table class="table table-bordered bg-white">
     <thead class="thead-dark">
         <tr>
-            <th scope="col">Product Name</th>
+            <th scope="col" style="width: 40%;">Product Name</th>
             <th scope="col">Stock Status</th>
+            <th scope="col">Price</th>
             <th scope="col">Site</th>
         </tr>
     </thead>
@@ -28,10 +29,11 @@
         <tr>
             <td><a href="{{item.url}}" target="_blank">{{item.product_name}}</a></td>
             <td>{{check_stock(item.site_name, item.url)}}</td>
+            <td>{{check_price(item.site_name, item.url)}}</td>
             <td>{{item.site_name}}</td>
         </tr>
         {%endfor%}
     </tbody>
-</table>
+</table class="mb-5">
 {% endif %}
 {% endblock content %}

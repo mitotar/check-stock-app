@@ -21,9 +21,29 @@ def check_stock(url):
         stock_status = stock_status.get_text()
     else:
         stock_status = soup.find(
-            "div", class_="online-availability__shipping-message").get_text()
+            "div", class_="online-availability__shipping-message").get_text().replace("Free shipping on orders over $35", "In stock")
 
     return stock_status
+
+
+def check_price(url):
+    try:
+        req = requests.get(url)
+    except requests.exceptions.ConnectionError:
+        return "Page not found"
+
+    text = req.text
+    # second term was added to avoid warning, as instructed by module terminal output
+    soup = BeautifulSoup(text, features="lxml")
+
+    price = soup.find("span", class_="item-price__price-amount")
+    # the html layout of regular price and sale price are slightly different so we have to look for different tags
+    if price:  # on sale
+        price = price.get_text()
+    else:
+        price = soup.find("div", class_="item-price__normal").get_text()
+
+    return price
 
 
 def get_product_name(url):

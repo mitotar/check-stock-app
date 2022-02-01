@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, flash
 from flask_login import login_required, current_user
 
 from .models import Users, Products
-from .products.product import check_stock as checkstock, create_product, SUPPORTED_SITES as SITES
+from .products.product import check_stock as checkstock, check_price, create_product, SUPPORTED_SITES as SITES
 from .web_helper import is_url_valid
 from . import db
 
@@ -12,7 +12,7 @@ views = Blueprint("views", __name__)
 @views.route("/stock")
 @login_required
 def check_stock():
-    return render_template("stock.html", values=Products.query.filter_by(username=current_user.username).all(), check_stock=checkstock)
+    return render_template("stock.html", values=Products.query.filter_by(username=current_user.username).all(), check_stock=checkstock, check_price=check_price)
 
 
 @views.route("/products", methods=["POST", "GET"])
