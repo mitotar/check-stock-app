@@ -16,7 +16,6 @@ def create_product(url):
         name = lego.get_product_name(url)
     elif site == bgb.SITE:
         name = bgb.get_product_name(url)
-
     return [site, name]
 
 
