@@ -26,3 +26,5 @@ app/products/__pycache__/lego_product.cpython-37.pyc
 app/products/__pycache__/product_indigo.cpython-37.pyc
 app/products/__pycache__/product_lego.cpython-37.pyc
 app/products/__pycache__/product.cpython-37.pyc
+src/products/__pycache__/product_amazon.cpython-37.pyc
+src/products/__pycache__/product_boardgamebliss.cpython-37.pyc

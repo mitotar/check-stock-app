@@ -9,7 +9,7 @@ def check_stock(url):
     html = requests.get(url).content
     sel = Selector(text=html)
     stock = sel.xpath(
-        "//p[@data-test='product-overview-availability']/span/text()").extract()[0]
+        "//p[@data-test='product-overview-availability']/span/text()")[0].extract()
     return stock
 
 
@@ -19,11 +19,11 @@ def check_price(url):
 
     price = sel.xpath("//span[@data-test='product-price-sale']/text()")
     if price:  # sale price
-        price = price.extract().replace("Sale Price", "$")
+        price = price[0].extract().replace("Sale Price", "$")
     else:
-        price = sel.xpath("//span[@data-test='product-price']/text()")[0]
+        price = sel.xpath("//span[@data-test='product-price']/text()")
         if price:  # regular price
-            price = "$" + price.extract()
+            price = "$" + price[0].extract()
         else:  # no price (retired product)
             price = "--------------"
 
@@ -34,4 +34,4 @@ def get_product_name(url):
     html = requests.get(url).content
     sel = Selector(text=html)
 
-    return sel.xpath("//h1[@data-test='product-overview-name']/span/text()").extract()
+    return sel.xpath("//h1[@data-test='product-overview-name']/span/text()")[0].extract()

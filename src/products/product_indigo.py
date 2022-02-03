@@ -6,19 +6,11 @@ SITE = "www.chapters.indigo.ca"
 
 
 def check_stock(url):
+    print(url)
     html = requests.get(url).content
     sel = Selector(text=html)
-    stock_status = sel.css(
-        "span.online-availability__availability-text::text").extract()
-
-    # the html layout of 'in stock' and 'out of stock' are slightly different so we have to look for different tags
-    if stock_status:
-        stock_status = stock_status.get_text()
-    else:
-        stock_status = sel.css(
-            "div.online-availability__shipping-message").extract().replace("Free shipping on orders over $35", "In stock")
-
-    return stock_status
+    return sel.css(
+        "div.online-availability__shipping-message span::text")[0].extract()
 
 
 def check_price(url):
@@ -28,9 +20,9 @@ def check_price(url):
     price = sel.css("span.item-price__price-amount::text")
     # the html layout of regular price and sale price are slightly different so we have to look for different tags
     if price:  # on sale
-        price = price.extract()
+        price = price[0].extract()
     else:
-        price = sel.css("div.item-price__normal::text").extract()
+        price = sel.css("div.item-price__normal::text")[0].extract()
 
     return price
 
@@ -39,4 +31,4 @@ def get_product_name(url):
     html = requests.get(url).content
     sel = Selector(text=html)
 
-    return sel.css("h1.product-title::text").extract()
+    return sel.css("h1.product-title::text")[0].extract()
