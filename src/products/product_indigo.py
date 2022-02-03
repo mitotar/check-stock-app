@@ -1,59 +1,34 @@
-from bs4 import BeautifulSoup
 import requests
+from scrapy import Selector
+
 
 SITE = "www.chapters.indigo.ca"
 
 
 def check_stock(url):
-    try:
-        req = requests.get(url)
-    except requests.exceptions.ConnectionError:
-        return "Page not found"
-
-    text = req.text
-    # second term was added to avoid warning, as instructed by module terminal output
-    soup = BeautifulSoup(text, features="lxml")
-    stock_status = soup.find(
-        "span", class_="online-availability__availability-text")
-
-    # the html layout of 'in stock' and 'out of stock' are slightly different so we have to look for different tags
-    if stock_status:
-        stock_status = stock_status.get_text()
-    else:
-        stock_status = soup.find(
-            "div", class_="online-availability__shipping-message").get_text().replace("Free shipping on orders over $35", "In stock")
-
-    return stock_status
+    print(url)
+    html = requests.get(url).content
+    sel = Selector(text=html)
+    return sel.css(
+        "div.online-availability__shipping-message span::text")[0].extract()
 
 
 def check_price(url):
-    try:
-        req = requests.get(url)
-    except requests.exceptions.ConnectionError:
-        return "Page not found"
+    html = requests.get(url).content
+    sel = Selector(text=html)
 
-    text = req.text
-    # second term was added to avoid warning, as instructed by module terminal output
-    soup = BeautifulSoup(text, features="lxml")
-
-    price = soup.find("span", class_="item-price__price-amount")
+    price = sel.css("span.item-price__price-amount::text")
     # the html layout of regular price and sale price are slightly different so we have to look for different tags
     if price:  # on sale
-        price = price.get_text()
+        price = price[0].extract()
     else:
-        price = soup.find("div", class_="item-price__normal").get_text()
+        price = sel.css("div.item-price__normal::text")[0].extract()
 
     return price
 
 
 def get_product_name(url):
-    try:
-        req = requests.get(url)
-    except requests.exceptions.ConnectionError:
-        return "Page not found"
+    html = requests.get(url).content
+    sel = Selector(text=html)
 
-    text = req.text
-    # second term was added to avoid warning, as instructed by module terminal output
-    soup = BeautifulSoup(text, features="lxml")
-
-    return soup.find("h1", class_="product-title").get_text()
+    return sel.css("h1.product-title::text")[0].extract()

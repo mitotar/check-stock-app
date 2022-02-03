@@ -14,7 +14,7 @@
     <h4>You have no products to check for. Add one from the "Products" page to get started.</h4>
 </div>
 {% else %}
-<table class="table table-bordered bg-white">
+<table class="table table-bordered bg-white mb-5">
     <thead class="thead-dark">
         <tr>
             <th scope="col" style="width: 40%;">Product Name</th>
@@ -34,6 +34,6 @@
         </tr>
         {%endfor%}
     </tbody>
-</table class="mb-5">
+</table>
 {% endif %}
 {% endblock content %}

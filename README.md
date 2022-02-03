@@ -24,3 +24,4 @@ More websites forthcoming!
     - Rona.ca
     - RenoDepot.ca
 7. Option to subscribe to notifications when stock/price changes
+8. Add unit tests

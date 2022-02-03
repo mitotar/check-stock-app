@@ -1,43 +1,26 @@
-from bs4 import BeautifulSoup
 import requests
+from scrapy import Selector
+
 
 SITE = "www.boardgamebliss.com"
 
 
 def check_stock(url):
-    try:
-        req = requests.get(url)
-    except requests.exceptions.ConnectionError:
-        return "Page not found"
-
-    text = req.text
-    # second term was added to avoid warning, as instructed by module terminal output
-    soup = BeautifulSoup(text, features="lxml")
-    return soup.find(
-        "span", class_="product-form__inventory").get_text()
+    html = requests.get(url).content
+    sel = Selector(text=html)
+    return sel.css(
+        "span.product-form__inventory::text")[0].extract()
 
 
 def check_price(url):
-    try:
-        req = requests.get(url)
-    except requests.exceptions.ConnectionError:
-        return "Page not found"
+    html = requests.get(url).content
+    sel = Selector(text=html)
 
-    text = req.text
-    # second term was added to avoid warning, as instructed by module terminal output
-    soup = BeautifulSoup(text, features="lxml")
-
-    return soup.find("span", class_="price").get_text()
+    return sel.css("span.price::text")[0].extract()
 
 
 def get_product_name(url):
-    try:
-        req = requests.get(url)
-    except requests.exceptions.ConnectionError:
-        return "Page not found"
+    html = requests.get(url).content
+    sel = Selector(text=html)
 
-    text = req.text
-    # second term was added to avoid warning, as instructed by module terminal output
-    soup = BeautifulSoup(text, features="lxml")
-
-    return soup.find("h1", class_="product-meta__title").get_text()
+    return sel.css("h1.product-meta__title::text")[0].extract()
